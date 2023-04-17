@@ -4,4 +4,4 @@
 #### Установка
 
 - composer require sashagm/themes
-- php artisan payment:install
+- php artisan themes:install
