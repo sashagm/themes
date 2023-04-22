@@ -1,6 +1,6 @@
 {
     "name": "sashagm/themes",
-    "description": "description",
+    "description": "service multi template in laravel",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -16,12 +16,7 @@
     "autoload": {
         "psr-4": {
             "Sashagm\\Themes\\": "src"
-        },
-        
-    "classmap": [
-        "database/seeds",
-        "database/factories"
-    ]
+        }
     },
     "extra": {
         "laravel": {
