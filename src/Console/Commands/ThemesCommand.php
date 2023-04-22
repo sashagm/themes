@@ -3,6 +3,7 @@
 namespace Sashagm\Themes\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Artisan;
 use Sashagm\Themes\Providers\ThemesServiceProvider;
 
@@ -46,6 +47,16 @@ class ThemesCommand extends Command
 
         Artisan::call('storage:link');
         $this->components->info('Storage link создан...');
+
+        DB::table('themes')->insert([
+            'title' => 'bootstrap',
+            'description' => 'Default template website',
+            'author' => 'Bootstrap',
+            'version' => '4.6.x',
+            'active'    => 1,
+        ]);
+
+        $this->components->info('Тестовая тема установлена...');
 
     }
 

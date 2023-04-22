@@ -16,7 +16,12 @@
     "autoload": {
         "psr-4": {
             "Sashagm\\Themes\\": "src"
-        }
+        },
+        
+    "classmap": [
+        "database/seeds",
+        "database/factories"
+    ]
     },
     "extra": {
         "laravel": {

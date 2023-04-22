@@ -1,9 +1,2 @@
 <?php
-
-    return [
-        
-        "variable"  => "testing",
-        "active"    =>  true,
-        "default"   => "Default"
-
-    ];
+define('Themes', 'bootstrap');

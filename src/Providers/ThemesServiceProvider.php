@@ -38,21 +38,6 @@ class ThemesServiceProvider extends ServiceProvider
             ]);
         }
 
-
-        if (config('themes.active') == true ) 
-        {
-            $themes = Themes::where('active', 1)
-            ->limit(1)
-            ->get();
-
-
-
-        if ($themes) {
-            $theme  = $themes[0]->title;
-        }   else {
-            $theme  = config('themes.default');
-        }
-        }
         
    
        
