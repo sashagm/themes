@@ -21,7 +21,7 @@ class ThemesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Команда установки пакета тем.';
+    protected $description = 'Данная команда установит все необходимые компоненты пакета (Управление темами).';
 
     /**
      * Execute the console command.
@@ -48,15 +48,8 @@ class ThemesCommand extends Command
         Artisan::call('storage:link');
         $this->components->info('Storage link создан...');
 
-        DB::table('themes')->insert([
-            'title' => 'bootstrap',
-            'description' => 'Default template website',
-            'author' => 'Bootstrap',
-            'version' => '4.6.x',
-            'active'    => 1,
-        ]);
-
-        $this->components->info('Тестовая тема установлена...');
+        Artisan::call('db:seed', ['--class' => 'ThemesSeeder']);
+        $this->components->info("Тестовая тема 'Bootstrap' установлена по умолчанию...");
 
     }
 

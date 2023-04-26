@@ -4,6 +4,7 @@ namespace Sashagm\Themes\Providers;
 
 use Sashagm\Themes\Models\Themes;
 use Illuminate\Support\ServiceProvider;
+use Sashagm\Themes\Seeders\ThemesSeeder;
 use Sashagm\Themes\Console\Commands\ThemesCommand;
 
 class ThemesServiceProvider extends ServiceProvider
@@ -21,9 +22,11 @@ class ThemesServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        
         $this->loadRoutesFrom(__DIR__.'/../routes/themes.php');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'themes');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/themes'),
@@ -38,6 +41,9 @@ class ThemesServiceProvider extends ServiceProvider
             ]);
         }
 
+        $this->publishes([
+            __DIR__ . '/../database/seeds/ThemesSeeder.php' => database_path('seeders/ThemesSeeder.php'),
+        ], 'themes-seeds');
         
    
        

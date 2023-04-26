@@ -5,3 +5,10 @@
 
 - composer require sashagm/themes
 - php artisan themes:install
+- php artisan db:seed --class=ThemesSeeder 
+
+
+
+#### Тестирование
+
+- ./vendor/bin/phpunit --configuration phpunit.xml

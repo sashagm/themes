@@ -59,5 +59,15 @@ class ThemesController extends Controller
         
     }
 
+    public function addThemes(Request $request)
+    {
+
+        /*
+            Ведется разработка, добавление своих тем будет в одном из обновлений.....
+        */
+        dd($request);
+
+    } 
+
     
 }
