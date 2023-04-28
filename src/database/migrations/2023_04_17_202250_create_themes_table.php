@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('themes', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('author');
-            $table->string('version');
-            $table->boolean('active');
+            $table->string('title')->unique();
+            $table->text('description')->nullable();
+            $table->string('author')->nullable();
+            $table->string('version')->nullable();
+            $table->boolean('active')->default(0);
             $table->timestamps();
         });
     }

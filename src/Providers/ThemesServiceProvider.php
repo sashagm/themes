@@ -5,6 +5,9 @@ namespace Sashagm\Themes\Providers;
 use Sashagm\Themes\Models\Themes;
 use Illuminate\Support\ServiceProvider;
 use Sashagm\Themes\Seeders\ThemesSeeder;
+use Sashagm\Themes\Console\Commands\CreateCommand;
+use Sashagm\Themes\Console\Commands\DeleteCommand;
+use Sashagm\Themes\Console\Commands\GetCommand;
 use Sashagm\Themes\Console\Commands\ThemesCommand;
 
 class ThemesServiceProvider extends ServiceProvider
@@ -38,6 +41,9 @@ class ThemesServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ThemesCommand::class,
+                CreateCommand::class,
+                DeleteCommand::class,
+                GetCommand::class,
             ]);
         }
 

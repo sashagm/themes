@@ -5,6 +5,7 @@ namespace Sashagm\Themes\Http\Controllers;
 use Illuminate\Http\Request;
 use Sashagm\Themes\Models\Themes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ThemesController extends Controller
 {
@@ -61,13 +62,49 @@ class ThemesController extends Controller
 
     public function addThemes(Request $request)
     {
+        self::checkAccess();
 
-        /*
-            Ведется разработка, добавление своих тем будет в одном из обновлений.....
-        */
-        dd($request);
+        Themes::query()->create([
+            'title' => $request->title,
+            'description' => $request->desc,
+            'author' => $request->author,
+            'version' => $request->ver,
+            'active'    => 0,
+        ]);
+        return back()->with('success', " Тема успешно создана! ");
 
     } 
 
+
+    public function deleteThemes(Request $request, $id)
+    {
+        self::checkAccess();
+        $s = Themes::where('id', $id)->limit(1)->first();
+        if ($s) {
+            $theme = Themes::destroy($id);
+            return back()->with('success', " Тема успешно удалена! ");
+        } else {
+            return back()->with('success', "Тему с ид: $id нельзя удалить так как её нет!");
+
+        }
+
+    }
+
+    public function checkAccess() {
+        switch(false) {
+            case true:
+                $user = Auth::user();
+                if (!$user){
+                    abort(403); // отправляем ошибку 403 Forbidden
+                }
+                if($user->id === 1) { // проверяем роль пользователя
+                    return true;
+                } else {
+                    abort(403); // отправляем ошибку 403 Forbidden
+                }
+            case false:
+                return true;
+        }
+    }
     
 }
