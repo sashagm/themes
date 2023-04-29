@@ -11,7 +11,6 @@ class ThemesController extends Controller
 {
     public function index()
     {
-
         $posts = Themes::all();
         return view('themes::index', [
             'posts' => $posts,
@@ -21,16 +20,16 @@ class ThemesController extends Controller
 
     public function setThemes(Request $request, int $id)
     {
-
         $info = Themes::findOrFail($id);
-
         $out = DB::update('update themes set active = 0 where id > ?', [0]);
-
         $res = DB::update('update themes set active = 1 where id = ?', [$id]);
 
         $data = "<?php\r\n";
-        $data.= "define('Themes', '$info->title');\r\n";
-
+        $data.= "
+        if(!defined('Themes')) {
+            define('Themes', '$info->title'); 
+        } \r\n";
+        
         $new_file=fopen(__DIR__. '/../../../../../../config/themes.php',"w");
         fwrite($new_file, $data);
         fclose($new_file);
@@ -56,7 +55,6 @@ class ThemesController extends Controller
             'status' => $info[0]->active
         ];
         return json_encode($res);
-
         
     }
 

@@ -1,2 +1,3 @@
-<?php
-define('Themes', 'bootstrap');
+if(!defined('Themes')) {
+    define('Themes', 'bootstrap'); 
+} 

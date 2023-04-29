@@ -51,7 +51,7 @@ class ThemesServiceProvider extends ServiceProvider
             __DIR__ . '/../database/seeds/ThemesSeeder.php' => database_path('seeders/ThemesSeeder.php'),
         ], 'themes-seeds');
         
-   
+        require __DIR__.'/../../../../../config/themes.php';
        
             
             
