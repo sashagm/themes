@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Sashagm\Themes\Models\Themes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 
 class ThemesController extends Controller
 {
@@ -33,6 +34,11 @@ class ThemesController extends Controller
         $new_file=fopen(__DIR__. '/../../../../../../config/themes.php',"w");
         fwrite($new_file, $data);
         fclose($new_file);
+
+        Artisan::call('cache:clear');    
+        Artisan::call('config:cache');    
+        Artisan::call('view:clear');  
+        Artisan::call('route:clear'); 
    
         return redirect()
         ->back()
