@@ -22,7 +22,10 @@
             "Sashagm\\Themes\\": "src",
             "Sashagm\\Themes\\Tests\\": "tests",
             "Sashagm\\Themes\\Seeders\\": "src/database/seeds"
-        }
+        },
+        "files": [
+            "src/Helpers/Constants.php"
+        ]
     },
     "extra": {
         "laravel": {
