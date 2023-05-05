@@ -36,6 +36,7 @@ class ThemesServiceProvider extends ServiceProvider
         ]);
         $this->publishes([
             __DIR__.'/../config/themes.php' => config_path('themes.php'),
+            __DIR__.'/../config/custom.php' => config_path('custom.php'),
         ]);
 
         if ($this->app->runningInConsole()) {
