@@ -21,7 +21,8 @@
         "psr-4": {
             "Sashagm\\Themes\\": "src",
             "Sashagm\\Themes\\Tests\\": "tests",
-            "Sashagm\\Themes\\Seeders\\": "src/database/seeds"
+            "Sashagm\\Themes\\Seeders\\": "src/database/seeds",
+            "Sashagm\\Themes\\Helpers\\": "src/Helpers"
         }
     },
     "extra": {
