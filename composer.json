@@ -1,6 +1,6 @@
 {
     "name": "sashagm/themes",
-    "description": "service multi template in laravel",
+    "description": "Наш пакет предоставляет удобный способ работы с мульти темами для вашего сайта. Вы можете легко создавать и изменять темы, а также управлять ими через наш интерфейс.",
     "minimum-stability": "stable",
     "license": "MIT",
     "authors": [
@@ -21,8 +21,7 @@
         "psr-4": {
             "Sashagm\\Themes\\": "src",
             "Sashagm\\Themes\\Tests\\": "tests",
-            "Sashagm\\Themes\\Seeders\\": "src/database/seeds",
-            "Sashagm\\Themes\\Helpers\\": "src/Helpers"
+            "Sashagm\\Themes\\Seeders\\": "src/database/seeds"
         }
     },
     "extra": {
