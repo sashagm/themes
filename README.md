@@ -7,6 +7,10 @@
 <a href="https://packagist.org/packages/sashagm/themes"><img src="https://img.shields.io/packagist/l/sashagm/themes" alt="License"></a>
 <a href="https://packagist.org/packages/sashagm/themes"><img src="https://img.shields.io/github/languages/code-size/sashagm/themes" alt="Code size"></a>
 <a href="https://packagist.org/packages/sashagm/themes"><img src="https://img.shields.io/packagist/stars/sashagm/themes" alt="Code size"></a>
+
+[![PHP Version](https://img.shields.io/badge/PHP-%2B8-blue)](https://www.php.net/)
+[![Laravel Version](https://img.shields.io/badge/Laravel-%2B10-red)](https://laravel.com/)
+
 </p>
 
 
