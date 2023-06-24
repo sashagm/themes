@@ -29,8 +29,8 @@ class ThemesController extends Controller
         $this->clear();
    
         return redirect()
-        ->back()
-        ->with('status', "Тема успешно установлена!");
+                ->back()
+                ->with('status', "Тема успешно установлена!");
 
     }
 
@@ -48,7 +48,8 @@ class ThemesController extends Controller
 
         $this->create($request);
         
-        return back()->with('success', " Тема успешно создана! ");
+        return back()
+                ->with('success', " Тема успешно создана! ");
 
     } 
 
