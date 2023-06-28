@@ -19,4 +19,30 @@ class Themes extends Model
         'active',
 
     ];
+
+    public static function getActiveThemeTitle()
+    {
+        $theme = self::where('active', 1)->first();
+
+        return $theme->title ?? null;
+    }
+
+    public static function getActiveThemeDescription()
+    {
+        $theme = self::where('active', 1)->first();
+
+        return $theme->description ?? null;
+    }
+
+    public static function getThemeInfo()
+    {
+        $theme = self::where('active', 1)->first();
+
+        return [
+            'title' => $theme->title ?? null,
+            'description' => $theme->description ?? null,
+            'author' => $theme->author ?? null,
+            'version' => $theme->version ?? null,
+        ];
+    }
 }
