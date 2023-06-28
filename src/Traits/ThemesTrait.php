@@ -17,19 +17,32 @@ trait ThemesTrait
     private function save($id)
     {
         $info = Themes::findOrFail($id);
-        $out = DB::update('update themes set active = 0 where id > ?', [0]);
-        $res = DB::update('update themes set active = 1 where id = ?', [$id]);
-
-        $data = "<?php\r\n";
-        $data.= "
-        if(!defined('Themes')) {
-            define('Themes', '$info->title'); 
-        } \r\n";
-        
-        $new_file=fopen(__DIR__. '/../../../../../config/themes.php',"w");
-        fwrite($new_file, $data);
-        fclose($new_file);
-
+    
+        if (!$info) {
+            throw new Exception('Тема не найдена');
+        }
+    
+        DB::beginTransaction();
+    
+        try {
+            DB::table('themes')->update(['active' => 0]);
+            DB::table('themes')->where('id', $id)->update(['active' => 1]);
+    
+            $data = "<?php\r\n";
+            $data.= "
+            if(!defined('Themes')) {
+                define('Themes', '$info->title'); 
+            } \r\n";
+    
+            $new_file=fopen( __DIR__ . '/../../../../../config/themes.php',"w");
+            fwrite($new_file, $data);
+            fclose($new_file);
+    
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw new Exception('Не удалось сохранить тему');
+        }
     }
 
     private function clear()
@@ -46,6 +59,10 @@ trait ThemesTrait
     {
         $info = Themes::where('title', Themes)
         ->get();
+
+        if (!$info) {
+            throw new Exception('Тема не найдена');
+        }
 
         $res = [
             'id' => $info[0]->id,

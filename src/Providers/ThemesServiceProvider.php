@@ -29,6 +29,8 @@ class ThemesServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../routes/themes.php');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'themes');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        $this->app['router']->aliasMiddleware('theme.access', \Sashagm\Themes\Http\Middleware\CheckThemeAccess::class);
         
 
         $this->publishes([
