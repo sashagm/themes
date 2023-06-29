@@ -44,8 +44,6 @@ class ThemesController extends Controller
 
     public function addThemes(Request $request)
     {
-        $this->checkAccess();
-
         $this->create($request);
         
         return back()
@@ -56,7 +54,7 @@ class ThemesController extends Controller
 
     public function deleteThemes(Request $request, $id)
     {
-        $this->checkAccess();
+
         if ($id == 1) {
             return back()
                     ->with('success', "Тему с ид: $id нельзя удалить так как она резервная и системная!");

@@ -17,27 +17,30 @@ trait ThemesTrait
     private function save($id)
     {
         $info = Themes::findOrFail($id);
-    
+
         if (!$info) {
             throw new Exception('Тема не найдена');
         }
-    
+
         DB::beginTransaction();
-    
+
         try {
-            DB::table('themes')->update(['active' => 0]);
-            DB::table('themes')->where('id', $id)->update(['active' => 1]);
-    
+            DB::table('themes')
+                ->update(['active' => 0]);
+            DB::table('themes')
+                ->where('id', $id)
+                ->update(['active' => 1]);
+
             $data = "<?php\r\n";
-            $data.= "
+            $data .= "
             if(!defined('Themes')) {
                 define('Themes', '$info->title'); 
             } \r\n";
-    
-            $new_file=fopen( __DIR__ . '/../../../../../config/themes.php',"w");
+
+            $new_file = fopen(__DIR__ . '/../../../../../config/themes.php', "w");
             fwrite($new_file, $data);
             fclose($new_file);
-    
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -47,10 +50,10 @@ trait ThemesTrait
 
     private function clear()
     {
-        Artisan::call('cache:clear');    
-        Artisan::call('config:cache');    
-        Artisan::call('view:clear');  
-        Artisan::call('route:clear'); 
+        Artisan::call('cache:clear');
+        Artisan::call('config:cache');
+        Artisan::call('view:clear');
+        Artisan::call('route:clear');
     }
 
 
@@ -58,7 +61,7 @@ trait ThemesTrait
     private function getCurrent()
     {
         $info = Themes::where('title', Themes)
-        ->get();
+            ->get();
 
         if (!$info) {
             throw new Exception('Тема не найдена');
@@ -77,35 +80,16 @@ trait ThemesTrait
 
 
 
-    private function checkAccess() {
-        switch(false) {
-            case true:
-                $user = Auth::user();
-                if (!$user){
-                    abort(403); // отправляем ошибку 403 Forbidden
-                }
-                if($user->id === 1) { // проверяем роль пользователя
-                    return true;
-                } else {
-                    abort(403); // отправляем ошибку 403 Forbidden
-                }
-            case false:
-                return true;
-        }
-    }
-
     private function create(Request $request)
     {
 
-        Themes::query()->create([
-            'title' => $request->title,
-            'description' => $request->desc,
-            'author' => $request->author,
-            'version' => $request->ver,
-            'active'    => 0,
-        ]);
-
+        Themes::query()
+                ->create([
+                    'title' => $request->title,
+                    'description' => $request->desc,
+                    'author' => $request->author,
+                    'version' => $request->ver,
+                    'active'    => 0,
+                ]);
     }
-
-
 }
