@@ -5,7 +5,7 @@ namespace Sashagm\Themes\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class CheckThemeAccess
+class CheckThemeDeleteAccess
 {
     public function handle($request, Closure $next)
     {
@@ -16,14 +16,14 @@ class CheckThemeAccess
         $user = Auth::user();
 
         if (!$user) {
-            abort(403, 'У вас нет прав на сохранение темы');
+            abort(403, 'У вас нет прав на удаление темы');
         }
 
         $colum = config('custom.check.save_colum');
         $val = config('custom.check.save_value');
 
         if ($user->$colum != $val) {
-            abort(403, 'У вас нет прав на сохранение темы');
+            abort(403, 'У вас нет прав на удаление темы');
         }
 
         return $next($request);

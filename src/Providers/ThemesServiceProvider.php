@@ -30,7 +30,9 @@ class ThemesServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'themes');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        $this->app['router']->aliasMiddleware('theme.access', \Sashagm\Themes\Http\Middleware\CheckThemeAccess::class);
+        $this->app['router']->aliasMiddleware('theme.save', \Sashagm\Themes\Http\Middleware\CheckThemeAccess::class);
+        $this->app['router']->aliasMiddleware('theme.access', \Sashagm\Themes\Http\Middleware\CheckThemeViewAccess::class);
+        $this->app['router']->aliasMiddleware('theme.delete', \Sashagm\Themes\Http\Middleware\CheckThemeDeleteAccess::class);
         
 
         $this->publishes([
