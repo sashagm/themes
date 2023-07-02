@@ -5,9 +5,10 @@ namespace Sashagm\Themes\Providers;
 use Sashagm\Themes\Models\Themes;
 use Illuminate\Support\ServiceProvider;
 use Sashagm\Themes\Seeders\ThemesSeeder;
+use Sashagm\Themes\Services\ThemesService;
+use Sashagm\Themes\Console\Commands\GetCommand;
 use Sashagm\Themes\Console\Commands\CreateCommand;
 use Sashagm\Themes\Console\Commands\DeleteCommand;
-use Sashagm\Themes\Console\Commands\GetCommand;
 use Sashagm\Themes\Console\Commands\ThemesCommand;
 
 class ThemesServiceProvider extends ServiceProvider
@@ -42,6 +43,14 @@ class ThemesServiceProvider extends ServiceProvider
             __DIR__.'/../config/themes.php' => config_path('themes.php'),
             __DIR__.'/../config/custom.php' => config_path('custom.php'),
         ]);
+
+
+        $this->app->singleton('themes', function () {
+            return new ThemesService;
+        });
+    
+        $this->app->alias('themes', ThemesService::class);
+
 
         if ($this->app->runningInConsole()) {
             $this->commands([
