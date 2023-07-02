@@ -30,17 +30,9 @@ trait ThemesTrait
             DB::table('themes')
                 ->where('id', $id)
                 ->update(['active' => 1]);
-
-            $data = "<?php\r\n";
-            $data .= "
-            if(!defined('Themes')) {
-                define('Themes', '$info->title'); 
-            } \r\n";
-
-            $new_file = fopen(__DIR__ . '/../../../../../config/themes.php', "w");
-            fwrite($new_file, $data);
-            fclose($new_file);
-
+                
+            $this->build($info);
+           
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -92,4 +84,21 @@ trait ThemesTrait
                     'active'    => 0,
                 ]);
     }
+
+
+    private function build($info)
+    {
+        $data = "<?php\r\n";
+        $data .= "
+        if(!defined('Themes')) {
+            define('Themes', '$info->title'); 
+        } \r\n";
+
+        $new_file = fopen(__DIR__ . '/../../../../../config/themes.php', "w");
+        fwrite($new_file, $data);
+        fclose($new_file);
+
+    }
+
+
 }
