@@ -22,7 +22,7 @@ class CheckThemeAccess
         $colum = config('custom.check.save_colum');
         $val = config('custom.check.save_value');
 
-        if ($user->$colum != $val) {
+        if (!in_array($user->$colum, $val)) {
             abort(403, 'У вас нет прав на сохранение темы');
         }
 
