@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Sashagm\Themes\Models\Themes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Artisan;
 use Sashagm\Themes\Traits\ThemesTrait;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ThemesController extends Controller
 {
@@ -57,17 +58,21 @@ class ThemesController extends Controller
 
         if ($id == 1) {
             return back()
-                    ->with('success', "Тему с ид: $id нельзя удалить так как она резервная и системная!");
+                    ->with('errors', "Тему с ид: $id нельзя удалить так как она резервная и системная!");
         }
-        $s = Themes::where('id', $id)->limit(1)->first();
-        if ($s) {
-            $theme = Themes::destroy($id);
+
+        try {
+            $theme = Themes::findOrFail($id);
+            $theme->delete();
+            
             return back()
                     ->with('success', " Тема успешно удалена! ");
-        } else {
+
+        } catch (ModelNotFoundException $e) {
             return back()
-                    ->with('success', "Тему с ид: $id нельзя удалить так как её нет!");
+                    ->with('errors', "Тему с ид: $id нельзя удалить так как её нет!");
         }
+
     } 
     
 
