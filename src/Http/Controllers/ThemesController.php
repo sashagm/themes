@@ -4,10 +4,8 @@ namespace Sashagm\Themes\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Sashagm\Themes\Models\Themes;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use Sashagm\Themes\Traits\ThemesTrait;
-use Illuminate\Support\Facades\Artisan;
+use Sashagm\Themes\Http\Requests\ThemesRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ThemesController extends Controller
@@ -43,8 +41,8 @@ class ThemesController extends Controller
         
     }
 
-    public function addThemes(Request $request)
-    {
+    public function addThemes(ThemesRequest $request)
+    {   
         $this->create($request);
         
         return back()

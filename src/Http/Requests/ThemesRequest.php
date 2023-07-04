@@ -14,8 +14,11 @@ class ThemesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:themes|max:255',
-
+            'title' => 'required|string|unique:themes|max:255',
+            'description' => 'nullable',
+            'author' => 'nullable',
+            'version' => 'nullable',
+            'active' => 'boolean',
         ];
     }
 
@@ -27,8 +30,8 @@ class ThemesRequest extends FormRequest
     public function messages()
     {
        return [
-            'name.required'     => 'Вы не указали название.',
-            'name.unique'       => 'Указанное название должно быть уникальным.',
+            'title.required'     => 'Вы не указали название.',
+            'title.unique'       => 'Указанное название должно быть уникальным.',
 
         ];        
     }

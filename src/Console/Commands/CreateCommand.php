@@ -4,9 +4,6 @@ namespace Sashagm\Themes\Console\Commands;
 
 use Illuminate\Console\Command;
 use Sashagm\Themes\Models\Themes;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Artisan;
-use Sashagm\Themes\Providers\ThemesServiceProvider;
 
 class CreateCommand extends Command
 {

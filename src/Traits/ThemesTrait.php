@@ -4,12 +4,11 @@ namespace  Sashagm\Themes\Traits;
 
 
 use Exception;
+use Illuminate\Http\Request;
 use Sashagm\Themes\Models\Themes;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Http\Request;
+use Sashagm\Themes\Http\Requests\ThemesRequest;
 
 trait ThemesTrait
 {
@@ -72,7 +71,7 @@ trait ThemesTrait
 
 
 
-    private function create(Request $request)
+    private function create(ThemesRequest $request)
     {
 
         Themes::query()

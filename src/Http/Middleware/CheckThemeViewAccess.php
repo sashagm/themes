@@ -13,16 +13,15 @@ class CheckThemeViewAccess
             return $next($request);
         }
 
-        $user = Auth::user();
- 
-    
+        $colum = config('custom.check.save_colum');
+        $val = config('custom.check.save_value');
+        $guard = config('custom.check.guard');
+
+        $user = Auth::guard($guard)->user();
 
         if (!$user) {
             abort(403, 'У вас нет прав на просмотр темы');
         }
-
-        $colum = config('custom.check.save_colum');
-        $val = config('custom.check.save_value');
 
         if (!in_array($user->$colum, $val)) {
             abort(403, 'У вас нет прав на просмотр темы');
