@@ -14,10 +14,11 @@ class ThemesServiceProvider extends ServiceProvider
 
     use BootTrait;
 
+
     /**
      * Register services.
      */
-    public function register(): void
+    public function register()
     {
         //
     }
@@ -25,23 +26,56 @@ class ThemesServiceProvider extends ServiceProvider
     /**
      * Bootstrap services.
      */
-    public function boot(): void
+    public function boot()
     {
-        
-        $this->loadRoutesFrom(__DIR__.'/../routes/themes.php');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'themes');
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/themes'),
-        ]);
-        $this->publishes([
-            __DIR__.'/../config/themes.php' => config_path('themes.php'),
-            __DIR__.'/../config/custom.php' => config_path('custom.php'),
-        ]);
+
+        $this->registerRouter();
+
+        $this->registerView();
+
+        $this->registerMigrate();
+
+        $this->publishFiles();
 
         $this->bootSys();
 
+        $this->registerCommands();
+
+        $this->publishSeeds();
+    }
+
+
+    protected function registerRouter()
+    {
+        $this->loadRoutesFrom(__DIR__ . '/../routes/themes.php');
+    }
+
+
+    protected function registerMigrate()
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+    }
+
+    protected function registerView()
+    {
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'themes');
+    }
+
+
+    protected function publishFiles()
+    {
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/themes'),
+        ]);
+
+        $this->publishes([
+            __DIR__ . '/../config/themes.php' => config_path('themes.php'),
+            __DIR__ . '/../config/custom.php' => config_path('custom.php'),
+        ]);
+    }
+
+    protected function registerCommands()
+    {
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ThemesCommand::class,
@@ -50,14 +84,12 @@ class ThemesServiceProvider extends ServiceProvider
                 GetCommand::class,
             ]);
         }
+    }
 
+    protected function publishSeeds()
+    {
         $this->publishes([
             __DIR__ . '/../database/seeds/ThemesSeeder.php' => database_path('seeders/ThemesSeeder.php'),
         ], 'themes-seeds');
-        
-       
-       
-            
-            
     }
 }
