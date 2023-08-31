@@ -83,6 +83,13 @@ class ThemesServiceProvider extends ServiceProvider
                 DeleteCommand::class,
                 GetCommand::class,
             ]);
+        } else {
+            $this->commands([
+                ThemesCommand::class,
+                CreateCommand::class,
+                DeleteCommand::class,
+                GetCommand::class,
+            ]);
         }
     }
 
