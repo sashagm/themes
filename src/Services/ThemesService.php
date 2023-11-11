@@ -5,7 +5,7 @@ namespace Sashagm\Themes\Services;
 use Exception;
 
 
-class ThemesService
+class ThemesService 
 {
 
     const THEME_ONE = Themes;
