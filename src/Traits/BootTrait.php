@@ -27,7 +27,7 @@ trait BootTrait
 
     public function loadConfig()
     {
-        require __DIR__.'/../../../../../config/themes.php';
+        require __DIR__.'/../config/themes.php';
 
     }
 
