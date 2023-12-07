@@ -29,13 +29,13 @@ class ThemesServiceProvider extends ServiceProvider
     public function boot()
     {
 
+        $this->publishFiles();
+
         $this->registerRouter();
 
         $this->registerView();
 
         $this->registerMigrate();
-
-        $this->publishFiles();
 
         $this->bootSys();
 
