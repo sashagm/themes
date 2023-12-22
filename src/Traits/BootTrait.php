@@ -27,15 +27,13 @@ trait BootTrait
 
     public function loadConfig()
     {
-        $configPath = __DIR__ . '/../../../../../config/themes.php';
-
-		if (file_exists($configPath)) {
-			require $configPath;
-		} else {
-			//throw new \RuntimeException('File not found: ' . $configPath);
-			return false;
-		}
-
+        $configPath = base_path('config/themes.php');
+        
+        if (file_exists($configPath)) {
+            require $configPath;
+        } else {
+            require __DIR__.'/../config/themes.php';
+        }
     }
 
 
